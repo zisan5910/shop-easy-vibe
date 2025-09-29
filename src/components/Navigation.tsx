@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Search, Heart, ShoppingCart, ArrowLeft, Home, Phone } from 'lucide-react';
 import { useApp } from '@/context/AppContext';
 import { Button } from '@/components/ui/button';
+import { InstallPrompt } from '@/components/InstallPrompt';
 
 interface TopNavProps {
   title?: string;
@@ -10,6 +11,7 @@ interface TopNavProps {
   showSearch?: boolean;
   showWishlist?: boolean;
   showCart?: boolean;
+  showInstall?: boolean;
 }
 
 export const TopNavigation: React.FC<TopNavProps> = ({
@@ -17,7 +19,8 @@ export const TopNavigation: React.FC<TopNavProps> = ({
   showBack = false,
   showSearch = true,
   showWishlist = true,
-  showCart = true
+  showCart = true,
+  showInstall = false
 }) => {
   const { cart, wishlist } = useApp();
   
@@ -36,6 +39,8 @@ export const TopNavigation: React.FC<TopNavProps> = ({
         </div>
         
         <div className="flex items-center gap-2">
+          {showInstall && <InstallPrompt />}
+          
           {showSearch && (
             <Button variant="ghost" size="sm" asChild>
               <Link to="/search" className="p-2">

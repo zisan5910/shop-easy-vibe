@@ -5,6 +5,7 @@ import { useApp } from '@/context/AppContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
+import { ImagePreview } from '@/components/ImagePreview';
 
 interface ProductCardProps {
   product: Product;
@@ -48,7 +49,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     <Card className="group overflow-hidden card-shadow hover:product-shadow transition-all duration-300 hover-lift">
       <CardContent className="p-3 md:p-4">
         <div className="relative mb-2 md:mb-3">
-          <Link to={`/product/${product.id}`}>
+          <Link to={`/product/${product.id}`} className="hidden md:block">
+            <ImagePreview
+              src={product.image}
+              alt={product.name}
+              className="w-full h-32 md:h-48 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+            />
+          </Link>
+          <Link to={`/product/${product.id}`} className="block md:hidden">
             <img
               src={product.image}
               alt={product.name}
